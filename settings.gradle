@@ -1,0 +1,38 @@
+pluginManagement {
+    repositories {
+        gradlePluginPortal()
+        google()
+        mavenCentral()
+    }
+
+    plugins {
+        id 'com.android.library' version '7.2.1'
+        id 'com.android.application' version '7.2.1'
+        id 'org.jetbrains.kotlin.android' version '1.7.10'
+
+        id 'androidx.navigation'
+        id 'hilt-android-gradle-plugin'
+    }
+
+    resolutionStrategy {
+        eachPlugin {
+             if (requested.id.id == 'hilt-android-gradle-plugin') {
+                useModule("com.google.dagger:hilt-android-gradle-plugin:2.42")
+
+            } else if (requested.id.id == 'androidx.navigation') {
+                useModule("androidx.navigation:navigation-safe-args-gradle-plugin:2.5.0")
+            }
+        }
+    }
+}
+
+dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    repositories {
+        google()
+        mavenCentral()
+    }
+}
+
+rootProject.name = "Sample App"
+include ':app'
